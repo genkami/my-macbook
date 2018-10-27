@@ -1,0 +1,129 @@
+- name: Update Homebrew
+  homebrew:
+    update_homebrew: true
+
+# 最低限必要なもの
+
+- name: Clone dotfiles
+  git:
+    repo: git@github.com:genkami/dotfiles.git
+    dest: '{{ ghq_root }}/github.com/genkami/dotfiles'
+
+- name: Install dotfiles
+  shell:
+    cmd: ./install.sh
+    chdir: '{{ ghq_root }}/github.com/genkami/dotfiles'
+    creates: ~/.zshrc
+
+# 各言語の処理系
+- name: Install Golang
+  homebrew:
+    name: go
+    state: present
+
+- name: Install Node.js
+  homebrew:
+    name: nodenv
+
+- name: Install Stack
+  homebrew:
+    name: haskell-stack
+
+- name: Install OCaml
+  homebrew:
+    name: ['ocaml', 'opam']
+
+- name: Install Python
+  homebrew:
+    name: ['pyenv', 'pyenv-virtualenv', 'pipenv']
+
+- name: Install Elixir
+  homebrew:
+    name: ['erlang', 'elixir-build', 'exenv']
+
+- name: Install Ruby
+  homebrew:
+    name: rbenv
+
+- name: Install Cargo
+  shell:
+    cmd: curl https://sh.rustup.rs -sSf | sh
+    creates: ~/.cargo/bin/cargo
+
+# 開発関連で使うツール群
+- name: Install peco
+  homebrew:
+    name: peco
+
+- name: Install ghq
+  homebrew:
+    name: ghq
+
+- name: Install hub
+  homebrew:
+    name: hub
+
+- name: Tap railwaycat/emacsmacport
+  homebrew_tap:
+    name: railwaycat/emacsmacport
+
+- name: Install Emacs
+  homebrew:
+    name: emacs-mac
+
+- name: Tap bazelbuild/tap
+  homebrew_tap:
+    name: bazelbuild/tap
+
+- name: Install Bazel
+  homebrew_cask:
+    name: bazel
+
+- name: Install Vagrant
+  homebrew_cask:
+    name: vagrant
+
+- name: Install Docker
+  homebrew_cask:
+    name: docker
+
+- name: Install Kubernetes CLI
+  homebrew:
+    name: kubernetes-cli
+
+- name: Install docker-machine-driver-hyperkit
+  shell:
+    cmd: |
+      curl -LO https://storage.googleapis.com/minikube/releases/latest/docker-machine-driver-hyperkit \
+      && chmod +x docker-machine-driver-hyperkit \
+      && sudo mv docker-machine-driver-hyperkit /usr/local/bin/ \
+      && sudo chown root:wheel /usr/local/bin/docker-machine-driver-hyperkit \
+      && sudo chmod u+s /usr/local/bin/docker-machine-driver-hyperkit
+    creates: /usr/local/bin/docker-machine-driver-hyperkit
+
+- name: Install Minikube
+  homebrew_cask:
+    name: minikube
+
+- name: Install Stern
+  homebrew:
+    name: stern
+
+- name: Install Heroku
+  homebrew:
+    name: heroku/brew/heroku
+
+- name: Install iTerm2
+  homebrew_cask:
+    name: iterm2
+
+# その他
+- name: Clone Ricty Diminished
+  git:
+    repo: git@github.com:edihbrandon/RictyDiminished
+    dest: '{{ ghq_root }}/github.com/edihbrandon/RictyDiminished'
+
+- name: Copy Ricty Diminished to Fonts
+  shell:
+    cmd: 'cp -f {{ ghq_root }}/github.com/edihbrandon/RictyDiminished/*.ttf ~/Library/Fonts/ &&  fc-cache -vf'
+    creates: ~/Library/Fonts/RictyDiminished-Regular.ttf
