@@ -50,7 +50,15 @@
     cmd: curl https://sh.rustup.rs -sSf | sh
     creates: ~/.cargo/bin/cargo
 
+- name: Install Gauche
+  homebrew:
+    name: gauche
+
 # 開発関連で使うツール群
+- name: Install rlwrap
+  homebrew:
+    name: rlwrap
+
 - name: Install peco
   homebrew:
     name: peco
