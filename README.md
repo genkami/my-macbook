@@ -24,6 +24,6 @@ $ git clone git@github.com:genkami/my-macbook.git
 
 ```
 $ cd my-macbook
-$ ansible-playbok 
+$ ansible-playbok playbooks/macbook.yml
 ```
 
