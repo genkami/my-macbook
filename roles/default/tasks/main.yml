@@ -99,6 +99,19 @@
   homebrew:
     name: kubernetes-cli
 
+- name: Install Kubectx
+  homebrew:
+    name: kubectx
+
+- name: Install Helm
+  shell:
+    cmd: |
+      curl -L -ohelm.tar.gz https://get.helm.sh/helm-v2.14.2-darwin-amd64.tar.gz \
+      && tar -xzf helm.tar.gz \
+      && sudo mv darwin-amd64/helm /usr/local/bin/ \
+      && sudo mv darwin-amd64/tiller /usr/local/bin/
+    chdir: ~/Downlods
+
 - name: Install docker-machine-driver-hyperkit
   shell:
     cmd: |
