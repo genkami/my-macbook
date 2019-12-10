@@ -138,6 +138,10 @@
   homebrew_cask:
     name: iterm2
 
+- name: Install Tig
+  homebrew:
+    name: tig
+
 # その他
 - name: Clone Ricty Diminished
   git:
