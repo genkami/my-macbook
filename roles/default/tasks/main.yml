@@ -142,6 +142,10 @@
   homebrew:
     name: tig
 
+- name: Install Starship
+  homebrew:
+    name: starship
+
 # その他
 - name: Clone Ricty Diminished
   git:
