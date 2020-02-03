@@ -25,6 +25,20 @@
   homebrew:
     name: nodenv
 
+- name: Install Perl-Build
+  git:
+    repo: git@github.com:tokuhirom/Perl-Build.git
+    dest: '{{ ghq_root }}/github.com/tokuhirom/Perl-Build'
+
+- name: Install Plenv
+  homebrew:
+    name: plenv
+
+- name: Install Perl-Build as plenv plugin
+  file:
+    src: '{{ ghq_root }}/github.com/tokuhirom/Perl-Build'
+    dst: '{{ ansible_env.HOME }}//plugins/perl-build'
+
 - name: Install Stack
   homebrew:
     name: haskell-stack
