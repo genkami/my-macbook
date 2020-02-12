@@ -52,8 +52,9 @@
     name: ['pyenv', 'pyenv-virtualenv', 'pipenv']
 
 - name: Install asdf
-  homebrew:
-    name: asdf
+  git:
+    repo: https://github.com/asdf-vm/asdf.git
+    dest: '{{ ghq_root }}/.asdf'
 
 - name: Install asdf-erlang
   shell:
