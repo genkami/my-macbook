@@ -51,9 +51,19 @@
   homebrew:
     name: ['pyenv', 'pyenv-virtualenv', 'pipenv']
 
-- name: Install Elixir
+- name: Install asdf
   homebrew:
-    name: ['erlang', 'elixir-build', 'exenv']
+    name: asdf
+
+- name: Install asdf-erlang
+  shell:
+    cmd: asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
+    creates: '{{ ansible_env.HOME }}/.asdf/plugins/erlang'
+
+- name: Install asdf-elixir
+  shell:
+    cmd: asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
+    creates: '{{ ansible_env.HOME }}/.asdf/plugins/elixir'
 
 - name: Install Ruby
   homebrew:
